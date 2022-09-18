@@ -1,4 +1,5 @@
-import com.solomon.testdb.Model.ConnectionCreater;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.solomon.springcrm.Creater.ConnectionCreater;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -27,7 +28,23 @@ public class ConnectionTest {
         }
 
         Assert.assertTrue(isValid);
+    }
 
+    @Test
+    public void testConnectionConfigurationMySQL(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        ComboPooledDataSource comboPooledDataSource = context.getBean("myDataSource",ComboPooledDataSource.class);
+
+        boolean isValid = false;
+
+        try {
+            Connection connection = comboPooledDataSource.getConnection();
+            isValid = connection.isValid(10);
+        } catch (SQLException e) {
+            System.out.println(">> Error when creating Connection!");
+        }
+        Assert.assertTrue(isValid);
     }
 
 
