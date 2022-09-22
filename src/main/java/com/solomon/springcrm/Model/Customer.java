@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 
-@Entity
+@Entity 
 @Table(schema = "sample_crm", name = "customer")
 public class Customer {
 
