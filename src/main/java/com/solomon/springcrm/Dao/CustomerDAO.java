@@ -6,32 +6,28 @@ import java.util.List;
 
 public interface CustomerDAO {
 
-    // save customer
+  // save customer
 
-    public void saveCustomer(Customer customer);
+  public void saveCustomer(Customer customer);
 
-    public void saveCustomer(List<Customer> customerList);
+  public void saveCustomer(List<Customer> customerList);
 
-    // delete customer
+  // delete customer
 
-    public void deleteCustomerWithId(int id);
-    public void deleteCustomerWithName(String firstName,String lastName);
+  public void deleteCustomerWithId(int id);
 
+  public void deleteCustomerWithName(String firstName, String lastName);
 
-    // update customer
+  // update customer
 
-    public void updateCustomer(Customer customer);
+  public void updateCustomer(Customer customer);
 
-    public void updateCustomers(List<Customer> customerList);
+  public void updateCustomers(List<Customer> customerList);
 
+  // get customer
+  public List<Customer> getCustomers();
 
+  public Customer getCustomer(int index);
 
-    // get customer
-    public List<Customer> getCustomers();
-
-    public Customer getCustomer(int index);
-
-    public List<Customer> getCustomer(String firstName, String lastName);
-
-
+  public List<Customer> getCustomer(String firstName, String lastName);
 }
