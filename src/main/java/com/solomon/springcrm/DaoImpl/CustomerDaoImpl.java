@@ -1,4 +1,4 @@
-package com.solomon.springcrm.Impl;
+package com.solomon.springcrm.DaoImpl;
 
 import com.solomon.springcrm.Dao.CustomerDAO;
 import com.solomon.springcrm.Model.Customer;
@@ -7,12 +7,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository("customerDaoImpl")
+@Scope("singleton")
 public class CustomerDaoImpl implements CustomerDAO {
 
   @Autowired
@@ -27,16 +29,46 @@ public class CustomerDaoImpl implements CustomerDAO {
 
     Session session = sessionFactory.getCurrentSession();
 
-    Query<Customer> customerQuery = session.createQuery("from Customer c", Customer.class);
+    Query<Customer> customerQuery = session.createQuery("from Customer c ORDER BY c.lastName", Customer.class);
 
     customerList = customerQuery.getResultList();
 
     return customerList;
   }
 
+  // get customer with the index
+
+  @Override
+  public Customer getCustomer(int index) {
+    Session session = sessionFactory.getCurrentSession();
+
+    Query<Customer> query = session.createQuery("FROM Customer c WHERE c.id =:index");
+
+    query.setParameter("index", index);
+
+    Customer customer = query.getSingleResult();
+
+    return customer;
+  }
+  // get customer with first name and last name
+
+  @Override
+  public List<Customer> getCustomer(String firstName, String lastName) {
+
+    List<Customer> customerList;
+
+    Session session = sessionFactory.getCurrentSession();
+
+    Query query =
+        session.createQuery("FROM Customer c WHERE c.firstName =: first AND c.lastName =: last");
+
+    customerList = query.getResultList();
+
+    return customerList;
+  }
+
   // delete customers with id
   @Override
-  @Transactional
   public void deleteCustomerWithId(int id) {
     Session session = sessionFactory.getCurrentSession();
 
@@ -51,7 +83,6 @@ public class CustomerDaoImpl implements CustomerDAO {
 
   // delete customer with name of the customer
   @Override
-  @Transactional
   public void deleteCustomerWithName(String firstName, String lastName) {
     Session session = sessionFactory.getCurrentSession();
 
@@ -68,42 +99,9 @@ public class CustomerDaoImpl implements CustomerDAO {
     System.out.println(">> Done!");
   }
 
-  // get customer with the index
-
-  @Override
-  @Transactional
-  public Customer getCustomer(int index) {
-    Session session = sessionFactory.getCurrentSession();
-
-    Query<Customer> query = session.createQuery("FROM Customer c WHERE c.id =:index");
-
-    query.setParameter("index", index);
-
-    Customer customer = query.getSingleResult();
-
-    return customer;
-  }
-  // get customer with first name and last name
-
-  @Override
-  @Transactional
-  public List<Customer> getCustomer(String firstName, String lastName) {
-
-    List<Customer> customerList;
-
-    Session session = sessionFactory.getCurrentSession();
-
-    Query query =
-        session.createQuery("FROM Customer c WHERE c.firstName =: first AND c.lastName =: last");
-
-    customerList = query.getResultList();
-
-    return customerList;
-  }
   // save a customer
 
   @Override
-  @Transactional
   public void saveCustomer(Customer customer) {
     Session session = sessionFactory.getCurrentSession();
 
@@ -114,7 +112,6 @@ public class CustomerDaoImpl implements CustomerDAO {
   // save a list of customers
 
   @Override
-  @Transactional
   public void saveCustomer(List<Customer> customerList) {
     Session session = sessionFactory.getCurrentSession();
 
@@ -126,7 +123,6 @@ public class CustomerDaoImpl implements CustomerDAO {
 
   // update a customer
   @Override
-  @Transactional
   public void updateCustomer(Customer customer) {
 
     long index = customer.getId();
@@ -153,14 +149,11 @@ public class CustomerDaoImpl implements CustomerDAO {
     System.out.println(">> Update with customer " + customer.toString());
   }
 
-
   // update a list of Customers
   @Override
   public void updateCustomers(List<Customer> customerList) {
-    for(Customer customer : customerList){
+    for (Customer customer : customerList) {
       this.updateCustomer(customer);
     }
   }
-
-
 }
