@@ -9,10 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -55,5 +52,17 @@ public class CustomerController {
     // save the customer
     this.customerService.saveCustomer(customer);
     return "redirect:/customer/list";
+  }
+
+  @PostMapping("showFormForUpdate")
+  public String UpdateCustomer(@RequestParam("customerId") int customerId, Model model) {
+    // update the customer
+    int index = customerId;
+
+    Customer customer = this.customerService.getCustomer(index);
+
+    model.addAttribute("customer", customer);
+
+    return "customer-form";
   }
 }
