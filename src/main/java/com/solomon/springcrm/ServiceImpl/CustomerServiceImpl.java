@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   @Transactional
-  public Customer getCustomer(int index) {
+  public Customer getCustomer(long index) {
     Customer customer = this.customerDAO.getCustomer(index);
     return customer;
   }

@@ -27,7 +27,7 @@ public interface CustomerDAO {
   // get customer
   public List<Customer> getCustomers();
 
-  public Customer getCustomer(int index);
+  public Customer getCustomer(long index);
 
   public List<Customer> getCustomer(String firstName, String lastName);
 }

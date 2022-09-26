@@ -54,10 +54,10 @@ public class CustomerController {
     return "redirect:/customer/list";
   }
 
-  @PostMapping("showFormForUpdate")
-  public String UpdateCustomer(@RequestParam("customerId") int customerId, Model model) {
+  @GetMapping("showFormForUpdate")
+  public String UpdateCustomer(@RequestParam("customerId") long customerId, Model model) {
     // update the customer
-    int index = customerId;
+    long index = customerId;
 
     Customer customer = this.customerService.getCustomer(index);
 

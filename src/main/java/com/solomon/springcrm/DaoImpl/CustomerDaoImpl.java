@@ -39,7 +39,7 @@ public class CustomerDaoImpl implements CustomerDAO {
   // get customer with the index
 
   @Override
-  public Customer getCustomer(int index) {
+  public Customer getCustomer(long index) {
     Session session = sessionFactory.getCurrentSession();
 
     Query<Customer> query = session.createQuery("FROM Customer c WHERE c.id =:index");
@@ -105,7 +105,7 @@ public class CustomerDaoImpl implements CustomerDAO {
   public void saveCustomer(Customer customer) {
     Session session = sessionFactory.getCurrentSession();
 
-    session.save(customer);
+    session.saveOrUpdate(customer);
 
     System.out.println(">> Saved customer " + customer.toString());
   }
@@ -116,7 +116,7 @@ public class CustomerDaoImpl implements CustomerDAO {
     Session session = sessionFactory.getCurrentSession();
 
     for (Customer customer : customerList) {
-      session.save(customer);
+      session.saveOrUpdate(customer);
       System.out.println(">> Saved customer " + customer.toString());
     }
   }
@@ -125,28 +125,11 @@ public class CustomerDaoImpl implements CustomerDAO {
   @Override
   public void updateCustomer(Customer customer) {
 
-    long index = customer.getId();
-
-    String firstName = customer.getFirstName();
-
-    String lastName = customer.getLastName();
-
-    String email = customer.getEmail();
-
     Session session = sessionFactory.getCurrentSession();
 
-    Query query =
-        session.createQuery(
-            "UPDATE Customer c SET c.firstName =: first , c.lastName =: last , c.email =: mail WHERE c.id =: id");
+    session.saveOrUpdate(customer);
 
-    query.setParameter("first", firstName);
-    query.setParameter("last", lastName);
-    query.setParameter("mail", email);
-    query.setParameter("id", index);
-
-    query.executeUpdate();
-
-    System.out.println(">> Update with customer " + customer.toString());
+    System.out.println(">> Save or Update with customer " + customer.toString());
   }
 
   // update a list of Customers
