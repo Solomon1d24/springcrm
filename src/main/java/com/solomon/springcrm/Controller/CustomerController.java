@@ -65,4 +65,16 @@ public class CustomerController {
 
     return "customer-form";
   }
+
+  @GetMapping("showFormForDelete")
+  public String deleteCustomer(@RequestParam("customerId") long customerId, Model model) {
+    // delete the customer
+    long index = customerId;
+
+    Customer customer = this.customerService.getCustomer(index);
+
+    this.customerService.deleteCustomer(customer);
+
+    return "redirect:/customer/list";
+  }
 }

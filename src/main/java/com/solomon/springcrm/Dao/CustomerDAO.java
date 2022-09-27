@@ -18,6 +18,8 @@ public interface CustomerDAO {
 
   public void deleteCustomerWithName(String firstName, String lastName);
 
+  public void deleteCustomer(Customer customer);
+
   // update customer
 
   public void updateCustomer(Customer customer);

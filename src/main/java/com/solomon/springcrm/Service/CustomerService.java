@@ -15,6 +15,8 @@ public interface CustomerService {
 
   public void deleteCustomerWithName(String firstName, String lastName);
 
+  public void deleteCustomer(Customer customer);
+
   public void saveCustomer(Customer customer);
 
   public void saveCustomer(List<Customer> customerList);

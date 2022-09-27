@@ -29,7 +29,8 @@ public class CustomerDaoImpl implements CustomerDAO {
 
     Session session = sessionFactory.getCurrentSession();
 
-    Query<Customer> customerQuery = session.createQuery("from Customer c ORDER BY c.lastName", Customer.class);
+    Query<Customer> customerQuery =
+        session.createQuery("from Customer c ORDER BY c.lastName", Customer.class);
 
     customerList = customerQuery.getResultList();
 
@@ -97,6 +98,17 @@ public class CustomerDaoImpl implements CustomerDAO {
     query.executeUpdate();
 
     System.out.println(">> Done!");
+  }
+
+  @Override
+  public void deleteCustomer(Customer customer) {
+    Session session = sessionFactory.getCurrentSession();
+
+    long index = customer.getId();
+
+    session.delete(customer);
+
+    System.out.println(">> Deleted customer with id of " + index);
   }
 
   // save a customer
