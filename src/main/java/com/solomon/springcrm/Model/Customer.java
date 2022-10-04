@@ -3,6 +3,7 @@ package com.solomon.springcrm.Model;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity 
 @Table(schema = "sample_crm", name = "customer")
@@ -85,5 +86,20 @@ public class Customer {
         + email
         + '\''
         + '}';
+  }
+  // Generate the Equals method
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Customer customer = (Customer) o;
+    return id == customer.id && firstName.equals(customer.firstName) && lastName.equals(customer.lastName) && email.equals(customer.email);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstName, lastName, email);
   }
 }
