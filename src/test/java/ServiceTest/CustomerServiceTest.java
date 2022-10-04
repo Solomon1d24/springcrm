@@ -31,7 +31,7 @@ public class CustomerServiceTest {
     List<Customer> customerList1 =
         Arrays.asList(
             new Customer("Solomon", "Chow", "solo5698@connect.hku.hk"),
-            new Customer("Katrina", "Hon", "kathon@hku.hk"));
+            new Customer("Tom", "Cat", "kathon@hku.hk"));
 
     Mockito.when(this.customerService.getCustomers()).thenReturn(customerList1);
 
