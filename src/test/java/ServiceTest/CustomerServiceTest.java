@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class CustomerServiceTest {
 
@@ -65,5 +66,88 @@ public class CustomerServiceTest {
     Customer customer1 = customerList1.get(0);
 
     Assertions.assertEquals(customer, customer1);
+  }
+
+  @Test
+  public void deleteCustomerWithIdTest() {
+
+    // define the index
+    final int index = 1;
+
+    // when the desire action is performed
+    this.customerService.deleteCustomerWithId(index);
+
+    // verify whether the delete action of the dao is performed
+    Mockito.verify(this.customerDAO).deleteCustomerWithId(1);
+  }
+
+  @Test
+  public void deleteCustomerTest() {
+    // create the customer
+
+    Customer customer = new Customer("Solomon", "Chow", "solomon1d24@gmail.com");
+
+    // when the desired action is performed
+    this.customerService.deleteCustomer(customer);
+
+    // verify whether the action of the dao is performed
+    Mockito.verify(this.customerDAO).deleteCustomer(customer);
+  }
+
+  @Test
+  public void deleteCustomerWithName() {
+
+    final String firstName = "Solomon";
+    final String lastName = "Chow";
+
+    this.customerService.deleteCustomerWithName(firstName, lastName);
+
+    Mockito.verify(this.customerDAO).deleteCustomerWithName(firstName, lastName);
+  }
+
+  @Test
+  public void saveCustomerTest() {
+
+    // create the customer
+
+    Customer customer = new Customer("Solomon", "Chow", "solomon1d24@gmail.com");
+
+    // when the desired action is performed
+    this.customerService.saveCustomer(customer);
+
+    // verify whether the action of the dao is performed
+    Mockito.verify(this.customerDAO).saveCustomer(customer);
+  }
+
+  @Test
+  public void saveCustomersTest() {
+
+    // create the customer lists
+    List<Customer> customerList1 =
+        Arrays.asList(
+            new Customer("Solomon", "Chow", "solo5698@connect.hku.hk"),
+            new Customer("Tom", "Cat", "kathon@hku.hk"));
+
+    // when the desired action is performed
+    this.customerService.saveCustomer(customerList1);
+
+    // verify whether the action of the dao is performed
+
+    Mockito.verify(this.customerDAO).saveCustomer(customerList1);
+  }
+
+  @Test
+  public void updateCustomerTest() {
+
+    // create the customer
+    Customer customer = new Customer("Solomon", "Chow", "solomon1d24@gmail.com");
+
+    // when the destired action is performed
+
+    this.customerService.updateCustomer(customer);
+
+    // verify whether the dao has performed the action
+
+    Mockito.verify(this.customerDAO).updateCustomer(customer);
   }
 }
