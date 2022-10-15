@@ -21,6 +21,9 @@
 	<!-- Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven/>
 
+	<!-- Add AspectJ autoproxy support for AOP -->
+	<aop:aspectj-autoproxy />
+
 	<!-- Define Spring MVC view resolver -->
 	<bean
 			class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -68,8 +71,7 @@
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 
 
-	<!-- Add AspectJ autoproxy support for AOP -->
-	<aop:aspectj-autoproxy />
+
 
 
 

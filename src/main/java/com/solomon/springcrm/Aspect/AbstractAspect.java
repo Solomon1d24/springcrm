@@ -24,13 +24,6 @@ public abstract class AbstractAspect {
     public void forServicePackage() {
     }
 
-    @Pointcut("execution(* com.solomon.springcrm.*.*.get*(..))")
-    public void forGetterMethod() {
-    }
-
-    @Pointcut("execution(* com.solomon.springcrm.*.*.set*(..))")
-    public void forSetterMethod() {
-    }
 
     @Pointcut("execution(* com.solomon.springcrm.*.*.delete*(..))")
     public void forDeleteMethod() {
@@ -46,6 +39,10 @@ public abstract class AbstractAspect {
 
     @Pointcut("execution(* com.solomon.springcrm.*.*.get*(..))")
     public void forGetMethod() {
+    }
+
+    @Pointcut("execution(* com.solomon.springcrm.*.*.set*(..))")
+    public void forSetMethod(){
     }
 
 

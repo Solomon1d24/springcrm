@@ -1,5 +1,6 @@
 package com.solomon.springcrm.Model;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.util.Objects;
 
 @Entity 
 @Table(schema = "sample_crm", name = "customer")
+@Component
 public class Customer {
 
   // Generate the fields
