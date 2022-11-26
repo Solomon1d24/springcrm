@@ -24,6 +24,8 @@ Junit Jupiter: 5.8.1
 
 Mockito : 4.8.0
 
+Jackson Core: 2.9.5
+
 
 ### Functionality
 

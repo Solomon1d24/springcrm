@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service("customerServiceImpl")
@@ -18,7 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
   private CustomerDAO customerDAO;
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public List<Customer> getCustomers() {
     List<Customer> customerList = this.customerDAO.getCustomers();
 
@@ -26,51 +26,51 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public Customer getCustomer(long index) {
     Customer customer = this.customerDAO.getCustomer(index);
     return customer;
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public List<Customer> getCustomer(String firstName, String lastName) {
     List<Customer> customerList = this.customerDAO.getCustomer(firstName, lastName);
     return customerList;
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public void deleteCustomerWithId(int id) {
     this.customerDAO.deleteCustomerWithId(id);
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public void deleteCustomerWithName(String firstName, String lastName) {
     this.customerDAO.deleteCustomerWithName(firstName, lastName);
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public void deleteCustomer(Customer customer) {
       this.customerDAO.deleteCustomer(customer);
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public void saveCustomer(Customer customer) {
     this.customerDAO.saveCustomer(customer);
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public void saveCustomer(List<Customer> customerList) {
     this.customerDAO.saveCustomer(customerList);
   }
 
   @Override
-  @Transactional
+  @Transactional(transactionManager = "transactionManager")
   public void updateCustomer(Customer customer) {
     this.customerDAO.updateCustomer(customer);
   }

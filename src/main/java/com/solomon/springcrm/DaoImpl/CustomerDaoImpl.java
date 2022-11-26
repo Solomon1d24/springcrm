@@ -23,7 +23,6 @@ public class CustomerDaoImpl implements CustomerDAO {
 
   // get the customers
   @Override
-  @Transactional
   public List<Customer> getCustomers() {
     List<Customer> customerList;
 
